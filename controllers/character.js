@@ -1,15 +1,15 @@
 const { messages } = require("../constants/messages")
 const { status } = require("../constants/statusCodes")
 const { apiResponse } = require("../helpers/apiResponse")
-const actorService = require("../services/actor")
+const characterService = require("../services/character")
 
-const createActor = async (req, res) => {
-    const actorData = req.body
+const createCharacter = async (req, res) => {
+    const characterData = req.body
 
     try {
-        const actor = await actorService.createActor(actorData)
+        const character = await characterService.createCharacter(characterData)
 
-        const response = apiResponse(actor, status.success, messages.success)
+        const response = apiResponse(character, status.success, messages.success)
 
         return res.status(status.success).json(response)
     } catch (error) {
@@ -19,13 +19,13 @@ const createActor = async (req, res) => {
     }
 }
 
-const getAllActors = async (req, res) => {
+const getAllCharacters = async (req, res) => {
     const filterParams = req.query
 
     try {
-        const actors = await actorService.getAllActors(filterParams)
+        const characters = await characterService.getAllCharacters(filterParams)
 
-        const response = apiResponse(actors, status.success, messages.success)
+        const response = apiResponse(characters, status.success, messages.success)
 
         return res.status(status.success).json(response)
     } catch (error) {
@@ -35,19 +35,19 @@ const getAllActors = async (req, res) => {
     }
 }
 
-const getActorById = async (req, res) => {
-    const idActor = req.params.id
+const getCharacterById = async (req, res) => {
+    const idCharacter = req.params.id
 
     try {
-        const actor = await actorService.getActorById(idActor)
+        const character = await characterService.getCharacterById(idCharacter)
 
-        if (!actor) {
+        if (!character) {
             const response = apiResponse(null, status.notFound, messages.notFound)
 
             return res.status(status.notFound).json(response)
         }
 
-        const response = apiResponse(actor, status.success, messages.success)
+        const response = apiResponse(character, status.success, messages.success)
 
         return res.status(status.success).json(response)
     } catch (error) {
@@ -57,14 +57,14 @@ const getActorById = async (req, res) => {
     }
 }
 
-const updateActor = async (req, res) => {
-    const idActor = req.params.id
-    const dataActor = req.body
+const updateCharacter = async (req, res) => {
+    const idCharacter = req.params.id
+    const dataCharacter = req.body
 
     try {
-        const actor = await actorService.updateActor(idActor, dataActor)
+        const character = await characterService.updateCharacter(idCharacter, dataCharacter)
 
-        if (!actor) {
+        if (!character) {
             const response = apiResponse(null, status.notFound, messages.notFound)
 
             return res.status(status.notFound).json(response)
@@ -80,19 +80,19 @@ const updateActor = async (req, res) => {
     }
 }
 
-const deleteActor = async (req, res) => {
-    const idActor = req.params.id
+const deleteCharacter = async (req, res) => {
+    const idCharacter = req.params.id
 
     try {
-        const actor = await actorService.deleteActor(idActor)
+        const character = await characterService.deleteCharacter(idCharacter)
 
-        if (!actor) {
+        if (!character) {
             const response = apiResponse(null, status.notFound, messages.notFound)
 
             return res.status(status.notFound).json(response)
         }
 
-        const response = apiResponse(actor, status.success, messages.success)
+        const response = apiResponse(character, status.success, messages.success)
 
         return res.status(status.success).json(response)
     } catch (error) {
@@ -103,9 +103,9 @@ const deleteActor = async (req, res) => {
 }
 
 module.exports = {
-    createActor,
-    getAllActors,
-    getActorById,
-    updateActor,
-    deleteActor,
+    createCharacter,
+    getAllCharacters,
+    getCharacterById,
+    updateCharacter,
+    deleteCharacter,
 }

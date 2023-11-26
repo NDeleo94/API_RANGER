@@ -11,6 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use("/api/actors", require("./routers/actor"))
+app.use("/api/characters", require("./routers/character"))
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
