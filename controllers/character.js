@@ -70,7 +70,7 @@ const updateCharacter = async (req, res) => {
             return res.status(status.notFound).json(response)
         }
 
-        const response = apiResponse(actor, status.success, messages.success)
+        const response = apiResponse(character, status.success, messages.success)
 
         return res.status(status.success).json(response)
     } catch (error) {
