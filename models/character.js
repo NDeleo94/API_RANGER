@@ -12,8 +12,12 @@ const Character = sequelize.define('Character',
     },
 );
 
-Actor.hasMany(Character)
-
-Character.belongsTo(Actor)
+Character.belongsTo(Actor, {
+    foreignKey: {
+        name: "idActor",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+})
 
 module.exports = Character
