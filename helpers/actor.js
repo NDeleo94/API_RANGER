@@ -18,6 +18,11 @@ const actorFilterParams = (params) => {
             = { [Op.between]: [params.deathday_s, params.deathday_e] };
     }
 
+    if (params.country) {
+        filter.country
+            = { [Op.substring]: params.country };
+    }
+
     return filter
 }
 
