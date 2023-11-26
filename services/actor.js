@@ -1,8 +1,9 @@
+const { actorFilterParams } = require("../helpers/actor")
 const Actor = require("../models/actor")
 
 const createActor = async (dataActor) => {
     try {
-        const actor = Actor.create(dataActor)
+        const actor = await Actor.create(dataActor)
 
         return actor
     } catch (error) {
@@ -11,9 +12,18 @@ const createActor = async (dataActor) => {
     }
 }
 
-const getAllActors = async () => {
+const getAllActors = async (filterParams) => {
     try {
-        const actors = Actor.findAll()
+        const filter = actorFilterParams(filterParams)
+
+        const { offset, limit, deleted } = filterParams
+
+        const actors = await Actor.findAll({
+            where: filter,
+            limit: limit,
+            offset: offset,
+            paranoid: !deleted,
+        })
 
         return actors
     } catch (error) {
@@ -22,9 +32,9 @@ const getAllActors = async () => {
     }
 }
 
-const getActorById = async () => {
+const getActorById = async (idActor) => {
     try {
-        const actor = Actor.findByPk()
+        const actor = await Actor.findByPk(idActor)
 
         return actor
     } catch (error) {
@@ -35,7 +45,14 @@ const getActorById = async () => {
 
 const updateActor = async (idActor, dataActor) => {
     try {
-        const actor = Actor.findByPk()
+        await Actor.update(
+            dataActor, {
+            where: {
+                id: idActor
+            }
+        })
+
+        const actor = await Actor.findByPk(idActor)
 
         return actor
     } catch (error) {
@@ -46,7 +63,20 @@ const updateActor = async (idActor, dataActor) => {
 
 const deleteActor = async (idActor) => {
     try {
-        return "hola"
+        await Actor.destroy({
+            where: {
+                id: idActor
+            }
+        });
+
+        const actor = await Actor.findByPk(
+            idActor,
+            {
+                paranoid: false,
+            }
+        )
+
+        return actor
     } catch (error) {
         throw error
 
