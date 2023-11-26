@@ -20,14 +20,16 @@ const createActor = async (req, res) => {
 }
 
 const getAllActors = async (req, res) => {
+    const filterParams = req.query
+
     try {
-        const actors = await actorService.getAllActors()
+        const actors = await actorService.getAllActors(filterParams)
 
         const response = apiResponse(actors, status.success, messages.success)
 
         return res.status(status.success).json(response)
     } catch (error) {
-        const response = apiResponse(null, status.internalServerError, messages.internalServerError)
+        const response = apiResponse(error.message, status.internalServerError, messages.internalServerError)
 
         return res.status(status.internalServerError).json(response)
     }

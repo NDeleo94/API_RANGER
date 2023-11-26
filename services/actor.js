@@ -1,3 +1,4 @@
+const { actorFilterParams } = require("../helpers/actor")
 const Actor = require("../models/actor")
 
 const createActor = async (dataActor) => {
@@ -11,10 +12,17 @@ const createActor = async (dataActor) => {
     }
 }
 
-const getAllActors = async () => {
+const getAllActors = async (filterParams) => {
     try {
+        const filter = actorFilterParams(filterParams)
+
+        const { offset, limit, deleted } = filterParams
+
         const actors = await Actor.findAll({
-            paranoid: false
+            where: filter,
+            limit: limit,
+            offset: offset,
+            paranoid: !deleted,
         })
 
         return actors
