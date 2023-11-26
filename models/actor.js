@@ -8,7 +8,7 @@ const Actor = sequelize.define('Actor',
             allowNull: false,
         },
         birthday: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         country: {
@@ -16,7 +16,7 @@ const Actor = sequelize.define('Actor',
             allowNull: false,
         },
         deathday: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
     },
