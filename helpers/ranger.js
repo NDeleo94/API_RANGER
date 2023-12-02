@@ -3,9 +3,9 @@ const { Op } = require("sequelize");
 const rangerFilterParams = (params) => {
     const filter = {}
 
-    if (params.fullname) {
-        filter.fullname
-            = { [Op.substring]: params.fullname };
+    if (params.ranger) {
+        filter.ranger
+            = { [Op.substring]: params.ranger };
     }
 
     return filter
