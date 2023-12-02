@@ -52,9 +52,9 @@ const updateCharacter = async (idCharacter, dataCharacter) => {
             }
         })
 
-        const actor = await Character.findByPk(idCharacter)
+        const character = await Character.findByPk(idCharacter)
 
-        return actor
+        return character
     } catch (error) {
         throw error
 
