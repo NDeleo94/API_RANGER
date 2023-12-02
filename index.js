@@ -14,6 +14,7 @@ app.use("/api/actors", require("./routers/actor"))
 app.use("/api/characters", require("./routers/character"))
 app.use("/api/rangers", require("./routers/ranger"))
 app.use("/api/teams", require("./routers/team"))
+app.use("/api/seasons", require("./routers/seasons"))
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
